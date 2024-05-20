@@ -1,7 +1,10 @@
+from readings.views import BookViewSet
+from rest_framework import routers
 from django.urls import path
-from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('list', views.list_users, name='list'),
+    path('books/',
+         BookViewSet.as_view({'get': 'list', 'post': 'create'}), name='books'),
+    path('books/<int:pk>/', BookViewSet.as_view(
+        {'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='book'),
 ]
